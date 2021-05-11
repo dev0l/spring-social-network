@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<form th:action="@{/saveUser}" th:object="${user}" method="POST">
+  <input type="text" placeholder="Användare" th:field="*{name}">
+  <input type="text" placeholder="Adress" th:field="*{address}">
+  <input type="text" placeholder="Lösenord" th:field="*{password}">
+  <input type="text" placeholder="Bekräfta lösenord" th:name="passwordTwo">
+  <input type="submit" value="Registrera dig">
+</form>
+
+<!---
+<form th:action="@{/saveUserParam}" method="POST">
+    <input type="text" placeholder="Användare" th:name="name"><br>
+    <input type="text" placeholder="Adress" th:name="address"><br>
+    <input type="text" placeholder="Lösenord" th:name="passwordOne"><br>
+    <input type="text" placeholder="Bekräfta lösenord" th:name="passwordTwo"><br>
+    <input type="submit" value="Registrera dig">
+</form>-->
+
+<p th:text="${msg}"></p>
+
+<!---
+<div th:each="user:${users}">
+    <p th:text="${user.name}"></p>
+</div>-->
+
+</body>
+</html>

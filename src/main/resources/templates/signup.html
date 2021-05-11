@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up</title>
+</head>
+
+<body>
+
+
+  <form th:action="@{/saveUser}" th:object="${user}" method="POST">
+    <input type="text" placeholder="Username" autocomplete="off" th:field="*{name}">
+    <input type="text" placeholder="Adress" autocomplete="off" th:field="*{address}">
+    <input type="password" placeholder="Lösenord" th:field="*{password}">
+    <input type="password" placeholder="Bekräfta lösenord" th:name="passwordTwo">
+    <input type="submit" value="Registrera dig">
+  </form>
+
+  <p th:text="${msg}"></p>
+
+  <span>Already have an account?
+    <a href="/signin" rel="noopener noreferrer">Sign In</a>
+  </span>
+
+  <!--
+  <div th:each="user:${users}">
+    <p th:text="${user.name}"></p>
+  </div>
+  -->
+
+</body>
+
+</html>
