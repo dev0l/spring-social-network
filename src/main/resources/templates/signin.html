@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Sign In</title>
+</head>
+
+<body>
+
+
+  <form th:action="@{/authenticate-user}" method="POST">
+    <input type="text" placeholder="Användare" th:name="name">
+
+    <input type="password" placeholder="Lösenord" th:name="password">
+
+    <input type="submit" value="Logga in">
+  </form>
+
+  <p th:text="${msg}"></p>
+
+  <span>No account?
+    <a href="/signup" rel="noopener noreferrer">Sign Up</a>
+  </span>
+
+  <!--
+  <div th:each="user:${users}">
+      <p th:text="${user.name}"></p>
+  </div>
+  -->
+
+</body>
+
+</html>
