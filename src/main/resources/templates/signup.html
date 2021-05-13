@@ -9,13 +9,17 @@
 
 <body>
 
+<p>Fields with * is required</p>
 
   <form th:action="@{/saveUser}" th:object="${user}" method="POST">
-    <input type="text" placeholder="Username" autocomplete="off" th:field="*{name}">
-    <input type="text" placeholder="Adress" autocomplete="off" th:field="*{address}">
-    <input type="password" placeholder="Lösenord" th:field="*{password}">
-    <input type="password" placeholder="Bekräfta lösenord" th:name="passwordTwo">
-    <input type="submit" value="Registrera dig">
+    <input type="text" placeholder="Username *" autocomplete="off" th:field="*{username}">
+    <input type="password" placeholder="Password *" th:field="*{password}">
+    <input type="password" placeholder="Confirm Password *" th:name="passwordConfirm">
+    <input type="text" placeholder="First Name" autocomplete="off" th:field="*{firstname}">
+    <input type="text" placeholder="Last Name" autocomplete="off" th:field="*{lastname}">
+    <input type="text" placeholder="Email" autocomplete="off" th:field="*{email}">
+    <input type="text" placeholder="Address" autocomplete="off" th:field="*{address}">
+    <input type="submit" value="Sign Up">
   </form>
 
   <p th:text="${msg}"></p>
@@ -23,12 +27,6 @@
   <span>Already have an account?
     <a href="/signin" rel="noopener noreferrer">Sign In</a>
   </span>
-
-  <!--
-  <div th:each="user:${users}">
-    <p th:text="${user.name}"></p>
-  </div>
-  -->
 
 </body>
 

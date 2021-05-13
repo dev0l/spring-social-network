@@ -1,0 +1,5 @@
+UML Class Diagram:
+https://lucid.app/lucidchart/invitations/accept/inv_cfca6646-1971-40e5-b787-91e9f1e4fd0f?viewport_loc=-344%2C47%2C2498%2C1214%2C64uzszsc7g7u
+
+UML Use Case Diagram:
+https://lucid.app/lucidchart/invitations/accept/inv_e0f9d7ee-95a7-43ab-bb9e-ccb41a78bb6b?viewport_loc=-423%2C5%2C2482%2C1206%2C0_0

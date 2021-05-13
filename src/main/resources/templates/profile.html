@@ -9,15 +9,38 @@
 
 <body>
 
-  <p th:text="${msg}"></p>
+<!--  <p th:text="${msg}"></p>-->
 
-  <p th:text="${user.name}"></p>
+  <h1>Welcome!</h1>
+  <p th:text="${user.username}"></p>
+<!--  <img th:src="@{${user.img}}"/>-->
 
-  <!--
-  <div th:each="user:${users}">
-      <p th:text="${user.name}"></p>
-  </div>
-  -->
+<!--  <div th:each="user: ${users}">-->
+<!--      <p th:text="${user.username}"></p>-->
+<!--  </div>-->
+
+<!--<table>-->
+<!--  <thead>-->
+<!--  <tr>-->
+<!--    <th>ID</th>-->
+<!--    <th>Name</th>-->
+<!--    <th>Address</th>-->
+<!--  </tr>-->
+<!--  </thead>-->
+<!--  <tbody>-->
+<!--  <tr th:each="user: ${users}">-->
+<!--    <td th:text="${user.id}"></td>-->
+<!--    <td th:text="${user.username}"></td>-->
+<!--    <td th:text="${user.address}"></td>-->
+<!--    <td>-->
+<!--      <a th:href="@{'/edit/' + ${user.id}}">Update</a>-->
+<!--    </td>-->
+<!--    <td>-->
+<!--      <a th:href="@{'/delete/' + ${user.id}}">Delete</a>-->
+<!--    </td>-->
+<!--  </tr>-->
+<!--  </tbody>-->
+<!--</table>-->
 
 </body>
 

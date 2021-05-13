@@ -11,7 +11,7 @@
 
 
   <form th:action="@{/authenticate-user}" method="POST">
-    <input type="text" placeholder="Användare" th:name="name">
+    <input type="text" placeholder="Användare" th:name="username">
 
     <input type="password" placeholder="Lösenord" th:name="password">
 
@@ -26,7 +26,7 @@
 
   <!--
   <div th:each="user:${users}">
-      <p th:text="${user.name}"></p>
+      <p th:text="${user.username}"></p>
   </div>
   -->
 

@@ -1,21 +1,18 @@
 package com.dev0l.springsocialnetwork.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-public class User {
+@Table(name ="users")
+public class User extends Person{
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
-  private String name;
-  private String address;
+  private String username;
   private String password;
-  //salt field created for saving and querying the database
   private String salt;
+  private String img;
 
   public User() {
   }
@@ -28,18 +25,12 @@ public class User {
     this.id = id;
   }
 
-  public String getName() {
-    return name;
+  public String getUsername() {
+    return username;
   }
 
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getAddress() { return address; }
-
-  public void setAddress(String address) {
-    this.address = address;
+  public void setUsername(String username) {
+    this.username = username;
   }
 
   public String getPassword() {
@@ -50,19 +41,23 @@ public class User {
     this.password = password;
   }
 
-  public String getSalt() {
-    return salt;
+  public String getSalt() { return salt; }
+
+  public void setSalt(String salt) { this.salt = salt; }
+
+  public String getImg() {
+    return img;
   }
 
-  public void setSalt(String salt) {
-    this.salt = salt;
+  public void setImg(String img) {
+    this.img = img;
   }
 
   @Override
   public String toString() {
     return "User{" +
             "id=" + id +
-            ", name='" + name + '\'' +
+            ", username='" + username + '\'' +
             '}';
   }
 }

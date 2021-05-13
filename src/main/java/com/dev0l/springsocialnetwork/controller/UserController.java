@@ -16,39 +16,39 @@ public class UserController {
   @Autowired
   private UserService userService;
 
-  /***** START *****/
+  /***** Start *****/
 
   @GetMapping("/")
-//  public String welcome(@ModelAttribute("user") User user) {
   public String welcome() {
     return "index";
   }
 
   /***** Sign In *****/
 
-  //Endpoint which returns the login view
+  //Endpoint which returns the signin view
   @GetMapping("/signin")
-  public String signInView(@ModelAttribute("user") User user) {
-    return "signin";
-  }
+  public String signIn() { return "signin"; }
 
   //Handles user authentication, returns either an error or success message
   @PostMapping("/authenticate-user")
-  public String authUser(@RequestParam String name, @RequestParam String password) {
-    if (userService.authUser(name, password)) {
-      return "redirect:/authenticated";
+  public String authUser(@RequestParam String username, @RequestParam String password) {
+    User user = userService.findUserByUsername(username);
+    Long id = user.getId();
+//    Long id = userService.findUserById(id);
+    if (userService.authUser(username, password)) {
+      return "redirect:/profile/" + id;
+//      return "redirect:/authenticated";
     }
     return "redirect:/authError";
   }
 
   //Success response from above method which displays
   //a message dynamically in the login form
-  @GetMapping("/authenticated")
-  public String authenticated(Model model) {
-    model.addAttribute("msg", "You Are Signed In");
-//    return "redirect:/profile/{id}";
-    return "signin";
-  }
+//  @GetMapping("/authenticated")
+//  public String authenticated(Model model) {
+//    model.addAttribute("msg", "You Are Signed In");
+//    return "signin";
+//  }
 
   //Fail response from above method which displays
   //a message dynamically in the login form
@@ -61,35 +61,29 @@ public class UserController {
   /***** Sign Up *****/
 
   @GetMapping("/signup")
-  public String signUpView(@ModelAttribute("user") User user) {
-    return "signup";
-  }
+  public String signUp(@ModelAttribute("user") User user) { return "signup"; }
 
   @PostMapping("/saveUser")
   public String saveUser(User user,
-                         @RequestParam("password") String passwordOne,
-                         @RequestParam("passwordTwo") String passwordTwo) {
+                         @RequestParam("password") String password,
+                         @RequestParam("passwordConfirm") String passwordConfirm) {
 
-    if (passwordOne.equals(passwordTwo)) {
+    if (password.equals(passwordConfirm)) {
       userService.saveUser(user);
       return "redirect:/success";
     }
-
     return "redirect:/failed";
-
   }
 
   @GetMapping("/success")
-  public String success(@ModelAttribute("user") User user,
-                        Model model) {
-    model.addAttribute("msg", "Du har sparats");
+  public String success(@ModelAttribute("user") User user) {
     return "redirect:/signin";
   }
 
   @GetMapping("/failed")
   public String failed(@ModelAttribute("user") User user,
                        Model model) {
-    model.addAttribute("msg", "Oj nåt gick fel!");
+    model.addAttribute("msg", "Oops something went wrong!");
     return "signup";
   }
 

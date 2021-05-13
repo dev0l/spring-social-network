@@ -50,7 +50,7 @@ public class UserService {
     User userDB = userRepository.findById(user.getId()).orElseThrow();
     //Object returned from database is updated
     //name field updated
-    userDB.setName(user.getName());
+    userDB.setUsername(user.getUsername());
     //address field updated
     userDB.setAddress(user.getAddress());
     //Notice that the object which was queried from database and
@@ -61,22 +61,6 @@ public class UserService {
   public List<User> getAllUsers() {
     return userRepository.findAll();
   }
-
-
-  //this method is used to Encrypt a plain text password based on a specific encryption key
-  //The encryption key is returned by encryptionKeyProvider()
-/*    private String encryptPassword(String plainTextPass, int encryptionKey){
-        StringBuilder sb = new StringBuilder();
-        char [] chars  = plainTextPass.toCharArray();
-        for (char c: chars){
-            c = (char)(c+ encryptionKey);
-            sb.append(c);
-        }
-        return sb.toString();
-    }
-    private int encryptionKeyProvider(){
-        return 3;
-    }*/
 
   //Creates secure hash and returns it converted into a String in
   //order to save it in database
@@ -109,24 +93,11 @@ public class UserService {
     return hashedSalt;
   }
 
-
-  //Authenticating user based on Password Encryption
-/*    public boolean authUser(User user) {
-        User dbUser = userRepository.getTheUserWithName(user.getName());
-        if(dbUser == null){
-            System.out.println("Your name is not correct " + user.getName());
-            return false;
-        }
-
-        String encryptedPass = encryptPassword(user.getPassword(), encryptionKeyProvider());
-
-        return encryptedPass.equals(dbUser.getPassword());
-   }*/
   //Authenticating user based on Hashing
-  public boolean authUser(String name, String password) {
-    User dbUser = userRepository.findByName(name);
+  public boolean authUser(String username, String password) {
+    User dbUser = userRepository.findByUsername(username);
     if (dbUser == null) {
-      System.out.println("Your name is not correct " + name);
+      System.out.println("Username is not correct " + username);
       return false;
     }
     String passwordToCompare = createSecureHashPass(password, convertStringToByteForDB(dbUser.getSalt()));
@@ -138,6 +109,11 @@ public class UserService {
   public User findUserById(long id) {
     return userRepository.findById(id).orElseThrow();
   }
+
+  public User findUserByUsername(String username) {
+    return userRepository.findByUsername(username);
+  }
+
   //Deletes a User type object based on
   //its id field
   public void deleteUser(long id) {
