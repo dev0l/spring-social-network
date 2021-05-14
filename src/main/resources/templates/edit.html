@@ -4,25 +4,65 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous" defer>
+    </script>
+
+  <link rel="stylesheet" href="../static/css/style.css">
   <title>Edit User</title>
 </head>
 
 <body>
 
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">SSN</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-right" href="/signin">Sign In</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-right" href="/signup">Sign Up</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Profile
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Sign Out</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
   <form action="#" th:action="@{/update-user/}" th:object="${user}" method="POST">
     <input type="hidden" th:field="*{id}">
-    <input type="text" placeholder="Användare" th:field="*{username}">
+    <input type="text" placeholder="Username" th:field="*{username}">
+    <input type="text" placeholder="First Name" th:field="*{firstName}">
+    <input type="text" placeholder="Last Name" th:field="*{lastname}">
+    <input type="text" placeholder="Email" th:field="*{email}">
     <input type="text" placeholder="Adress" th:field="*{address}">
     <input type="submit" value="Update User">
   </form>
-
-
-  <!--
-  <div th:each="user:${users}">
-      <p th:text="${user.username}"></p>
-  </div>
-  -->
 
 </body>
 
