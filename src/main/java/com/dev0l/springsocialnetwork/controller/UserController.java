@@ -16,25 +16,22 @@ public class UserController {
   @Autowired
   private UserService userService;
 
-  /***** Start *****/
+  /********** Start **********/
 
   @GetMapping("/")
   public String welcome() {
     return "index";
   }
 
-  /***** Sign In *****/
+  /********** Sign In **********/
 
-  //Endpoint which returns the signin view
   @GetMapping("/signin")
   public String signIn() { return "signin"; }
 
-  //Handles user authentication, returns either an error or success message
   @PostMapping("/authenticate-user")
   public String authUser(@RequestParam String username, @RequestParam String password) {
     User user = userService.findUserByUsername(username);
     Long id = user.getId();
-//    Long id = userService.findUserById(id);
     if (userService.authUser(username, password)) {
       return "redirect:/profile/" + id;
 //      return "redirect:/authenticated";
@@ -58,7 +55,7 @@ public class UserController {
     return "signin";
   }
 
-  /***** Sign Up *****/
+  /********** Sign Up **********/
 
   @GetMapping("/signup")
   public String signUp(@ModelAttribute("user") User user) { return "signup"; }
@@ -87,7 +84,7 @@ public class UserController {
     return "signup";
   }
 
-  /***** Profile *****/
+  /********** Profile **********/
 
   @GetMapping("/profile/{id}")
   public ModelAndView showProfile(@PathVariable long id) {
@@ -98,7 +95,7 @@ public class UserController {
     return mv;
   }
 
-  /***** Admin Dashboard *****/
+  /********** Admin/Edit **********/
 
   //Endpoint to handle view which shows a table with
   //all user entries in the database.
