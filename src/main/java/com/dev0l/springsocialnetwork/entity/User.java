@@ -3,8 +3,8 @@ package com.dev0l.springsocialnetwork.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name ="users")
-public class User extends Person{
+@Table(name = "users")
+public class User extends Person {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,9 +41,13 @@ public class User extends Person{
     this.password = password;
   }
 
-  public String getSalt() { return salt; }
+  public String getSalt() {
+    return salt;
+  }
 
-  public void setSalt(String salt) { this.salt = salt; }
+  public void setSalt(String salt) {
+    this.salt = salt;
+  }
 
   public String getImg() {
     return img;

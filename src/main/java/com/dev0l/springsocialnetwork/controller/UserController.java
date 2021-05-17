@@ -29,23 +29,17 @@ public class UserController {
   public String signIn() { return "signin"; }
 
   @PostMapping("/authenticate-user")
-  public String authUser(@RequestParam String username, @RequestParam String password) {
+  public String authUser(@RequestParam("username") String username,
+                         @RequestParam("password") String password) {
+
     User user = userService.findUserByUsername(username);
-    Long id = user.getId();
-    if (userService.authUser(username, password)) {
+
+    if (user != null && userService.authUser(username, password)) {
+      Long id = user.getId();
       return "redirect:/profile/" + id;
-//      return "redirect:/authenticated";
     }
     return "redirect:/authError";
   }
-
-  //Success response from above method which displays
-  //a message dynamically in the login form
-//  @GetMapping("/authenticated")
-//  public String authenticated(Model model) {
-//    model.addAttribute("msg", "You Are Signed In");
-//    return "signin";
-//  }
 
   //Fail response from above method which displays
   //a message dynamically in the login form
@@ -123,14 +117,16 @@ public class UserController {
   @PostMapping("/update-user")
   public String updateUser(@ModelAttribute User user) {
     userService.updateUser(user);
-    return "redirect:/admin";
+//    return "redirect:/admin";
+    return "redirect:/profile";
   }
 
   //Endpoint that handles deleting a specific user
   @GetMapping("/delete/{id}")
   public String deleteUser(@PathVariable long id) {
     userService.deleteUser(id);
-    return "redirect:/admin";
+//    return "redirect:/admin";
+    return "redirect:/";
   }
 
 }

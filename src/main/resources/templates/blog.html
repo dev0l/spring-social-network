@@ -45,7 +45,7 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" th:href="@{'/edit/' + ${user.id}}">Edit Account</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
               <li><a class="dropdown-item" href="#">Sign Out</a></li>
             </ul>
           </li>
@@ -56,16 +56,16 @@
 
   <!--  <p th:text="${msg}"></p>-->
 
-  <h1>Welcome!</h1>
-  <p th:text="${user.username}"></p>
-  <!--  <img th:src="@{${user.img}}"/>-->
+  <form th:action="@{/savePost}" th:object="${post}" method="POST">
+    <input type="text" placeholder="Title" autocomplete="off" th:field="*{title}">
+    <input type="text" placeholder="Message *" th:field="*{message}">
+    <input type="submit" value="Submit Post">
+  </form>
 
-  <!--  <form th:action="@{/savePost}" th:object="${post}" method="POST">-->
-  <!--    <input type="text" placeholder="Title" autocomplete="off" th:field="*{title}">-->
-  <!--    <input type="text" placeholder="Message *" th:field="*{message}">-->
-  <!--    <input type="submit" value="Submit Post">-->
-  <!--  </form>-->
-
+  <div th:each="post:${posts}">
+    <p th:text="${post.message}"></p>
+  </div>
+  <!--  <p th:text="${post.title}"></p>-->
   <!--  <p th:text="${post.message}"></p>-->
 
 </body>

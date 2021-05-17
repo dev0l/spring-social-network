@@ -14,7 +14,7 @@
     integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous" defer>
     </script>
 
-  <link rel="stylesheet" href="../static/css/style.css">
+  <link rel="stylesheet" href="css/style.css">
   <title>Sign In</title>
 </head>
 
@@ -30,10 +30,10 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
+            <a class="nav-link" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link nav-right" href="/signin">Sign In</a>
+            <a class="nav-link nav-right active" aria-current="page" href="/signin">Sign In</a>
           </li>
           <li class="nav-item">
             <a class="nav-link nav-right" href="/signup">Sign Up</a>
@@ -56,22 +56,22 @@
 
   <form th:action="@{/authenticate-user}" method="POST">
     <div class="mb-3">
-<!--      <label for="exampleInputEmail1" class="form-label">Email address</label>-->
-<!--      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">-->
-<!--      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>-->
+      <!--      <label for="exampleInputEmail1" class="form-label">Email address</label>-->
+      <!--      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">-->
+      <!--      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>-->
       <label for="usernameInput" class="form-label">Username</label>
       <input type="text" class="form-control" id="usernameInput" aria-describedby="usernameHelp" th:name="username">
-<!--      <div id="usernameHelp" class="form-text">Text goes here</div>-->
+      <!--      <div id="usernameHelp" class="form-text">Text goes here</div>-->
     </div>
     <div class="mb-3">
       <label for="passwordInput" class="form-label">Password</label>
       <input type="password" class="form-control" id="passwordInput" aria-describedby="passwordHelp" th:name="password">
-<!--      <div id="passwordHelp" class="form-text">Text goes here<</div>-->
+      <!--      <div id="passwordHelp" class="form-text">Text goes here<</div>-->
     </div>
-<!--    <div class="mb-3 form-check">-->
-<!--      <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
-<!--      <label class="form-check-label" for="exampleCheck1">Check me out</label>-->
-<!--    </div>-->
+    <!--    <div class="mb-3 form-check">-->
+    <!--      <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
+    <!--      <label class="form-check-label" for="exampleCheck1">Check me out</label>-->
+    <!--    </div>-->
     <button type="submit" class="btn btn-primary">Sign In</button>
   </form>
 
