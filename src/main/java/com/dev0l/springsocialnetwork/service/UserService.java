@@ -17,6 +17,33 @@ public class UserService {
   @Autowired
   private UserRepository userRepository;
 
+  public List<User> getAllUsers() {
+    return userRepository.findAll();
+  }
+
+  //Returns a User type object to Controller based on
+  //its id field
+  public User findUserById(long id) {
+    return userRepository.findById(id).orElseThrow();
+  }
+
+  public User findUserByUsername(String username) {
+    return userRepository.findByUsername(username);
+  }
+
+  //Used to update fields of a given database entry
+  public void updateUser(User user) {
+    //User is queried from the database by using its id field => user.getId();
+    User userDB = userRepository.findById(user.getId()).orElseThrow();
+    //Object returned from database is updated
+    //name field updated
+    userDB.setUsername(user.getUsername());
+    //address field updated
+    userDB.setAddress(user.getAddress());
+    //Notice that the object which was queried from database and
+    //subsequently updated is the one that is saved.
+    userRepository.save(userDB);
+  }
 
   public void saveUser(User user) {
     //String encryptedPass = encryptPassword(user.getPassword(), encryptionKeyProvider());
@@ -44,24 +71,6 @@ public class UserService {
 
   }
 
-  //Used to update fields of a given database entry
-  public void updateUser(User user){
-    //User is queried from the database by using its id field => user.getId();
-    User userDB = userRepository.findById(user.getId()).orElseThrow();
-    //Object returned from database is updated
-    //name field updated
-    userDB.setUsername(user.getUsername());
-    //address field updated
-    userDB.setAddress(user.getAddress());
-    //Notice that the object which was queried from database and
-    //subsequently updated is the one that is saved.
-    userRepository.save(userDB);
-  }
-
-  public List<User> getAllUsers() {
-    return userRepository.findAll();
-  }
-
   //Creates secure hash and returns it converted into a String in
   //order to save it in database
   public String createSecureHashPass(String plainTextPassword, byte[] salt) {
@@ -81,6 +90,7 @@ public class UserService {
   private String convertByteToStringForDB(byte[] hashedPass) {
     return DatatypeConverter.printHexBinary(hashedPass).toLowerCase();
   }
+
   //Converts String to byte[]
   private byte[] convertStringToByteForDB(String dbPassword) {
     return DatatypeConverter.parseHexBinary(dbPassword);
@@ -102,16 +112,6 @@ public class UserService {
     }
     String passwordToCompare = createSecureHashPass(password, convertStringToByteForDB(dbUser.getSalt()));
     return dbUser.getPassword().equals(passwordToCompare);
-  }
-
-  //Returns a User type object to Controller based on
-  //its id field
-  public User findUserById(long id) {
-    return userRepository.findById(id).orElseThrow();
-  }
-
-  public User findUserByUsername(String username) {
-    return userRepository.findByUsername(username);
   }
 
   //Deletes a User type object based on

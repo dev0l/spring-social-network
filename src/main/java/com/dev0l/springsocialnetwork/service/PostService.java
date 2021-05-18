@@ -13,19 +13,19 @@ public class PostService {
   @Autowired
   private PostRepository postRepository;
 
-  public void savePost(Post post){
-    postRepository.save(post);
-  }
-
   public List<Post> getAllPosts(){
     return postRepository.findAll();
+  }
+
+  public Post getPostById(Long id){
+    return postRepository.findById(id).orElseThrow();
   }
 
   public Post getPostByTitle(String title){
     return postRepository.findByTitle(title);
   }
 
-  public Post getPostById(Long id){
-    return postRepository.findById(id).orElseThrow();
+  public void savePost(Post post){
+    postRepository.save(post);
   }
 }
