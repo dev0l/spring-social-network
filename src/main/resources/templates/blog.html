@@ -63,7 +63,10 @@
   </form>
 
   <div th:each="post:${posts}">
+    <p th:text="${post.title}"></p>
     <p th:text="${post.message}"></p>
+    <!--    <p th:text="${post.author}"></p>-->
+    <a th:href="@{'/delete-post/' + ${post.id}}">Delete</a>
   </div>
   <!--  <p th:text="${post.title}"></p>-->
   <!--  <p th:text="${post.message}"></p>-->

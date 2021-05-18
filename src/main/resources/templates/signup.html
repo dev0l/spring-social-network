@@ -60,7 +60,7 @@
 
   <span>Fields with * are required</span>
 
-  <form th:action="@{/saveUser}" th:object="${user}" method="POST">
+  <form th:action="@{/save-user}" th:object="${user}" method="POST">
     <input type="text" placeholder="Username *" autocomplete="off" th:field="*{username}">
     <input type="password" placeholder="Password *" th:field="*{password}">
     <input type="password" placeholder="Confirm Password *" th:name="passwordConfirm">

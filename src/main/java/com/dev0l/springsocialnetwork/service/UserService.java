@@ -46,9 +46,6 @@ public class UserService {
   }
 
   public void saveUser(User user) {
-    //String encryptedPass = encryptPassword(user.getPassword(), encryptionKeyProvider());
-    //user.setPassword(encryptedPass);
-
     //Calls method with name generateSalt() => returns byte array (byte[])
     byte[] salt = generateSalt();
     //salt value returned by generateSalt() above is converted into String

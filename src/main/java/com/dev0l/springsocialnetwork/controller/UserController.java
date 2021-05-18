@@ -1,6 +1,8 @@
 package com.dev0l.springsocialnetwork.controller;
 
+import com.dev0l.springsocialnetwork.entity.Post;
 import com.dev0l.springsocialnetwork.entity.User;
+import com.dev0l.springsocialnetwork.service.PostService;
 import com.dev0l.springsocialnetwork.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ public class UserController {
 
   @Autowired
   private UserService userService;
+//  private PostService postService;
 
   /********** Start **********/
 
@@ -54,12 +57,13 @@ public class UserController {
   @GetMapping("/signup")
   public String signUp(@ModelAttribute("user") User user) { return "signup"; }
 
-  @PostMapping("/saveUser")
+  @PostMapping("/save-user")
   public String saveUser(User user,
                          @RequestParam("password") String password,
                          @RequestParam("passwordConfirm") String passwordConfirm) {
 
     if (password.equals(passwordConfirm)) {
+      user.setImg("https://via.placeholder.com/150");
       userService.saveUser(user);
       return "redirect:/success";
     }
@@ -88,6 +92,17 @@ public class UserController {
     mv.addObject(userToShow);
     return mv;
   }
+
+//  @GetMapping("/profile/{id}")
+//  public ModelAndView showProfile(@PathVariable long id, @ModelAttribute("post") Post post) {
+//    ModelAndView mv = new ModelAndView();
+//    mv.setViewName("profile");
+//    User userToShow = userService.findUserById(id);
+//    mv.addObject(userToShow);
+//    List<Post> posts = postService.getAllPosts();
+//    mv.addObject("posts", posts);
+//    return mv;
+//  }
 
   /********** Admin/Edit **********/
 

@@ -15,6 +15,7 @@
     </script>
 
   <link rel="stylesheet" href="css/style.css">
+<!--  <link th:href="@{/static/css/style.css}" rel="stylesheet">-->
   <title>Sign In</title>
 </head>
 
@@ -56,17 +57,19 @@
 
   <!--  <p th:text="${msg}"></p>-->
 
-  <h1>Welcome!</h1>
+<!--  <h1 id="test">Welcome!</h1>-->
+  <img th:src="@{${user.img}}"/>
   <p th:text="${user.username}"></p>
-  <!--  <img th:src="@{${user.img}}"/>-->
 
-  <!--  <form th:action="@{/savePost}" th:object="${post}" method="POST">-->
-  <!--    <input type="text" placeholder="Title" autocomplete="off" th:field="*{title}">-->
-  <!--    <input type="text" placeholder="Message *" th:field="*{message}">-->
-  <!--    <input type="submit" value="Submit Post">-->
-  <!--  </form>-->
+<!--  <form th:action="@{/savePost}" th:object="${post}" method="POST">-->
+<!--    <input type="text" placeholder="Title" autocomplete="off" th:field="*{title}">-->
+<!--    <input type="text" placeholder="Message *" th:field="*{message}">-->
+<!--    <input type="submit" value="Submit Post">-->
+<!--  </form>-->
 
-  <!--  <p th:text="${post.message}"></p>-->
+<!--  <div th:each="post:${posts}">-->
+<!--    <p th:text="${post.message}"></p>-->
+<!--  </div>-->
 
 </body>
 
