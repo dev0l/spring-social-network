@@ -21,8 +21,6 @@ public class UserService {
     return userRepository.findAll();
   }
 
-  //Returns a User type object to Controller based on
-  //its id field
   public User findUserById(long id) {
     return userRepository.findById(id).orElseThrow();
   }
@@ -65,7 +63,6 @@ public class UserService {
       user.setPassword(hashedPassword);
       userRepository.save(user);
     }
-
   }
 
   //Creates secure hash and returns it converted into a String in
@@ -111,8 +108,6 @@ public class UserService {
     return dbUser.getPassword().equals(passwordToCompare);
   }
 
-  //Deletes a User type object based on
-  //its id field
   public void deleteUser(long id) {
     userRepository.deleteById(id);
   }

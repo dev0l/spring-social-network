@@ -2,7 +2,6 @@ package com.dev0l.springsocialnetwork.controller;
 
 import com.dev0l.springsocialnetwork.entity.Post;
 import com.dev0l.springsocialnetwork.entity.User;
-import com.dev0l.springsocialnetwork.service.PostService;
 import com.dev0l.springsocialnetwork.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,16 +16,15 @@ public class UserController {
 
   @Autowired
   private UserService userService;
-//  private PostService postService;
 
-  /********** Start **********/
+  /******************** Start ********************/
 
   @GetMapping("/")
   public String welcome() {
     return "index";
   }
 
-  /********** Sign In **********/
+  /******************** Sign In ********************/
 
   @GetMapping("/signin")
   public String signIn() { return "signin"; }
@@ -44,15 +42,13 @@ public class UserController {
     return "redirect:/authError";
   }
 
-  //Fail response from above method which displays
-  //a message dynamically in the login form
   @GetMapping("/authError")
   public String authError(Model model) {
     model.addAttribute("msg", "Sign In Failed");
     return "signin";
   }
 
-  /********** Sign Up **********/
+  /******************** Sign Up ********************/
 
   @GetMapping("/signup")
   public String signUp(@ModelAttribute("user") User user) { return "signup"; }
@@ -82,32 +78,22 @@ public class UserController {
     return "signup";
   }
 
-  /********** Profile **********/
+  /******************** Profile ********************/
 
   @GetMapping("/profile/{id}")
-  public ModelAndView showProfile(@PathVariable long id) {
+  public ModelAndView showProfile(@ModelAttribute("post") Post post,
+                                  @PathVariable long id) {
     ModelAndView mv = new ModelAndView();
     mv.setViewName("profile");
+//    List<Post> posts = postService.getAllPosts();
+//    mv.addObject("posts", posts);
     User userToShow = userService.findUserById(id);
     mv.addObject(userToShow);
     return mv;
   }
 
-//  @GetMapping("/profile/{id}")
-//  public ModelAndView showProfile(@PathVariable long id, @ModelAttribute("post") Post post) {
-//    ModelAndView mv = new ModelAndView();
-//    mv.setViewName("profile");
-//    User userToShow = userService.findUserById(id);
-//    mv.addObject(userToShow);
-//    List<Post> posts = postService.getAllPosts();
-//    mv.addObject("posts", posts);
-//    return mv;
-//  }
+  /******************** Admin/Edit ********************/
 
-  /********** Admin/Edit **********/
-
-  //Endpoint to handle view which shows a table with
-  //all user entries in the database.
   @GetMapping("/admin")
   public ModelAndView adminDashboard() {
     ModelAndView mv = new ModelAndView();
@@ -117,8 +103,6 @@ public class UserController {
     return mv;
   }
 
-  //Endpoint for editing specific database entries
-  //Their id field is used to query them from the database.
   @GetMapping("/edit/{id}")
   public ModelAndView updateUser(@PathVariable long id) {
     ModelAndView mv = new ModelAndView();
@@ -128,7 +112,6 @@ public class UserController {
     return mv;
   }
 
-  //Endpoint that handles updating a specific user
   @PostMapping("/update-user")
   public String updateUser(@ModelAttribute User user) {
     userService.updateUser(user);
@@ -136,7 +119,6 @@ public class UserController {
     return "redirect:/profile";
   }
 
-  //Endpoint that handles deleting a specific user
   @GetMapping("/delete/{id}")
   public String deleteUser(@PathVariable long id) {
     userService.deleteUser(id);

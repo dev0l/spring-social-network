@@ -20,7 +20,7 @@
 
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">SSN</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
@@ -33,19 +33,17 @@
             <a class="nav-link" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link nav-right" href="/signin">Sign In</a>
+            <a class="nav-link" href="/posts">Posts</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link nav-right" href="/signup">Sign Up</a>
-          </li>
+        </ul>
+        <ul class="navbar-nav nav-right ms-auto">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+            <a class="nav-link btn btn-secondary dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
               Profile
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink">
               <li><a class="dropdown-item" th:href="@{'/profile/' + ${user.id}}">Profile</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
               <li><a class="dropdown-item" href="#">Sign Out</a></li>
             </ul>
           </li>
@@ -54,17 +52,51 @@
     </div>
   </nav>
 
-  <form action="#" th:action="@{/update-user/}" th:object="${user}" method="POST">
-    <input type="hidden" th:field="*{id}">
-    <input type="text" placeholder="Username" th:field="*{username}">
-    <input type="text" placeholder="First Name" th:field="*{firstname}">
-    <input type="text" placeholder="Last Name" th:field="*{lastname}">
-    <input type="text" placeholder="Email" th:field="*{email}">
-    <input type="text" placeholder="Adress" th:field="*{address}">
-    <input type="submit" value="Update User">
-  </form>
+  <div class="container">
 
-  <a th:href="@{'/delete/' + ${user.id}}">Delete Account</a>
+    <!--  <form action="#" th:action="@{/update-user/}" th:object="${user}" method="POST">-->
+    <!--    <input type="hidden" th:field="*{id}">-->
+    <!--    <input type="text" placeholder="Username" th:field="*{username}">-->
+    <!--    <input type="text" placeholder="First Name" th:field="*{firstname}">-->
+    <!--    <input type="text" placeholder="Last Name" th:field="*{lastname}">-->
+    <!--    <input type="text" placeholder="Email" th:field="*{email}">-->
+    <!--    <input type="text" placeholder="Adress" th:field="*{address}">-->
+    <!--    <input type="submit" value="Update User">-->
+    <!--  </form>-->
+
+    <form action="#" th:action="@{/update-user/}" th:object="${user}" method="POST">
+      <input type="hidden" th:field="*{id}">
+      <div class="form-group">
+        <label for="username" class="col-form-label">Username</label>
+        <input type="text" class="form-control" id="username" placeholder="Username" autocomplete="off"
+          th:field="*{username}">
+      </div>
+      <div class="form-group">
+        <label for="firstname" class="col-form-label">First Name</label>
+        <input type="text" class="form-control" id="firstname" placeholder="First Name" autocomplete="off"
+          th:field="*{firstname}">
+      </div>
+      <div class="form-group">
+        <label for="lastname" class="col-form-label">Last Name</label>
+        <textarea type="text" class="form-control" id="lastname" placeholder="Last Name" autocomplete="off"
+          th:field="*{lastname}"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="email" class="col-form-label">Email</label>
+        <textarea type="text" class="form-control" id="email" placeholder="Email" autocomplete="off"
+          th:field="*{email}"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="address" class="col-form-label">Address</label>
+        <textarea type="text" class="form-control" id="address" placeholder="Address" autocomplete="off"
+          th:field="*{address}"></textarea>
+      </div>
+      <input class="btn btn-primary btn-block" type="submit" value="Submit Post">
+    </form>
+
+    <a th:href="@{'/delete/' + ${user.id}}">Delete Account</a>
+
+  </div>
 
 </body>
 

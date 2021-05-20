@@ -14,7 +14,10 @@
     integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous" defer>
     </script>
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" defer></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js" defer></script>
+
+  <script src="js/validate.js" defer></script>
 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 
@@ -24,7 +27,7 @@
 
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">SSN</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
@@ -37,19 +40,19 @@
             <a class="nav-link" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link nav-right" href="/signin">Sign In</a>
+            <a class="nav-link" href="/posts">Posts</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link nav-right active" aria-current="page" href="/signup">Sign Up</a>
-          </li>
+        </ul>
+        <ul class="navbar-nav nav-right ms-auto">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+            <a class="nav-link btn btn-secondary dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
               Profile
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink">
+              <!--<li><a class="dropdown-item" th:href="@{'/profile/' + ${user.id}}">Profile</a></li>-->
+              <li><a class="dropdown-item" href="/signin">Sign In</a></li>
+              <li><a class="dropdown-item" href="/signup">Sign Up</a></li>
               <li><a class="dropdown-item" href="#">Sign Out</a></li>
             </ul>
           </li>
@@ -58,9 +61,9 @@
     </div>
   </nav>
 
-  <span>Fields with * are required</span>
+  <!--  <span>Fields with * are required</span>-->
 
-  <form th:action="@{/save-user}" th:object="${user}" method="POST">
+  <!-- <form th:action="@{/save-user}" th:object="${user}" method="POST">
     <input type="text" placeholder="Username *" autocomplete="off" th:field="*{username}">
     <input type="password" placeholder="Password *" th:field="*{password}">
     <input type="password" placeholder="Confirm Password *" th:name="passwordConfirm">
@@ -69,35 +72,72 @@
     <input type="text" placeholder="Email" autocomplete="off" th:field="*{email}">
     <input type="text" placeholder="Address" autocomplete="off" th:field="*{address}">
     <input type="submit" value="Sign Up">
-  </form>
+  </form> -->
 
-  <!-- <div class="container">
+  <div class="container">
 
     <div class="card bg-light">
       <article class="card-body mx-auto" style="max-width: 400px;">
-        <h4 class="card-title mt-3 text-center">Create Account</h4>
-        <p class="text-center">Get started with your free account</p>
+        <h4 class="card-title mt-3 text-center">Sign Up</h4>
+        <!-- <p class="text-center">Get started with your free account</p> -->
         <p>
-          <a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter"></i>Login via Twitter</a>
-          <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>Login via facebook</a>
+          <a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter"></i>Sign Up via Twitter</a>
+          <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>Sign Up via facebook</a>
         </p>
         <p class="divider-text">
           <span class="bg-light">OR</span>
         </p>
-        <form>
+        <p id="formInstructions">Fields marked with (*) are required.</p>
+        <p th:text="${msg}"></p>
+        <form name="signup" th:action="@{/save-user}" th:object="${user}" method="POST">
           <div class="form-group input-group">
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fa fa-user"></i> </span>
             </div>
-            <input name="" class="form-control" placeholder="Full name" type="text">
+            <input type="text" class="form-control" placeholder="Username *" autocomplete="off" required
+              aria-required="true" th:field="*{username}">
+          </div>
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+            </div>
+            <input class="form-control" type="password" placeholder="Password *" required aria-required="true"
+              th:field="*{password}">
+          </div>
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+            </div>
+            <input class="form-control" type="password" placeholder="Confirm Password *" required aria-required="true"
+              th:name="passwordConfirm">
+          </div>
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+            </div>
+            <input class="form-control" type="text" placeholder="First Name" autocomplete="off" th:field="*{firstname}">
+          </div>
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+            </div>
+            <input class="form-control" type="text" placeholder="Last Name" autocomplete="off" th:field="*{lastname}">
           </div>
           <div class="form-group input-group">
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
             </div>
-            <input name="" class="form-control" placeholder="Email address" type="email">
+            <input class="form-control" type="text" placeholder="Email" aria-describedby="emailHelp" autocomplete="off"
+              th:field="*{email}">
+            <!--            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>-->
           </div>
           <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+            </div>
+            <input class="form-control" type="text" placeholder="Address" autocomplete="off" th:field="*{address}">
+          </div>
+          <!-- <div class="form-group input-group">
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
             </div>
@@ -108,8 +148,8 @@
               <option value="3">+701</option>
             </select>
             <input name="" class="form-control" placeholder="Phone number" type="text">
-          </div>
-          <div class="form-group input-group">
+          </div> -->
+          <!-- <div class="form-group input-group">
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fa fa-building"></i> </span>
             </div>
@@ -119,34 +159,16 @@
               <option>Manager</option>
               <option>Accaunting</option>
             </select>
-          </div>
-          <div class="form-group input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-            </div>
-            <input class="form-control" placeholder="Create password" type="password">
-          </div>
-          <div class="form-group input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-            </div>
-            <input class="form-control" placeholder="Repeat password" type="password">
-          </div>
+          </div> -->
           <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block"> Create Account </button>
           </div>
-          <p class="text-center">Have an account? <a href="">Log In</a> </p>
+          <p class="text-center">Already have an account? <a href="/signin">Sign In</a> </p>
         </form>
       </article>
     </div>
 
-  </div> -->
-
-  <p th:text="${msg}"></p>
-
-  <span>Already have an account?
-    <a href="/signin" rel="noopener noreferrer">Sign In</a>
-  </span>
+  </div>
 
 </body>
 
