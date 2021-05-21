@@ -57,11 +57,11 @@ public class User extends Person {
     this.img = img;
   }
 
-  @Override
+/*  @Override
   public String toString() {
     return "User{" +
             "id=" + id +
             ", username='" + username + '\'' +
             '}';
-  }
+  }*/
 }

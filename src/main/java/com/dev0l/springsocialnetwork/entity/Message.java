@@ -8,14 +8,6 @@ public class Message {
   private String title;
   private String message;
 
-//  @CreatedDate
-//  @Column(name = "created_at", nullable = false, updatable = false)
-//  private Date createdAt;
-//
-//  @LastModifiedDate
-//  @Column(name = "modified_at")
-//  private LocalDateTime modifieddAt;
-
   public Message() {
   }
 

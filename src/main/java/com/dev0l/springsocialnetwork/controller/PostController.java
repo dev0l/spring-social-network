@@ -3,45 +3,49 @@ package com.dev0l.springsocialnetwork.controller;
 import com.dev0l.springsocialnetwork.entity.Post;
 import com.dev0l.springsocialnetwork.entity.User;
 import com.dev0l.springsocialnetwork.service.PostService;
+import com.dev0l.springsocialnetwork.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Controller
 public class PostController {
 
   @Autowired
   private PostService postService;
+  @Autowired
+  private UserService userService;
+
+  /******************** Start ********************/
 
   @GetMapping("/posts")
-  public ModelAndView allPosts(@ModelAttribute("post") Post post) {
-    ModelAndView mv = new ModelAndView();
-    mv.setViewName("posts");
-    List<Post> posts = postService.getAllPosts();
-    mv.addObject("posts", posts);
-    return mv;
+  public String allPosts(@ModelAttribute("post") Post post, Model model,
+                         @CookieValue("currentUser") String currentUser) {
+    model.addAttribute("posts", postService.getAllPosts());
+    model.addAttribute("user", userService.findUserById(Long.parseLong(currentUser)));
+    return "posts";
   }
 
-  @GetMapping("/posts/{id}")
-  public ModelAndView getPostofUser(@PathVariable long id) {
-    ModelAndView mv = new ModelAndView();
-    mv.setViewName("posts");
-    List<Post> postList = postService.getPostsOfUser(id);
-    mv.addObject(postList);
-    return mv;
-  }
+  /******************** Add Post ********************/
 
   @PostMapping("/addpost")
-  public ModelAndView savePost(@ModelAttribute Post post, User user) {
-    ModelAndView mv = new ModelAndView();
-    mv.setViewName("profile");
-    Post savedPost = postService.savePost(user, post.getContent());
-    mv.addObject(savedPost);
-    return mv;
+  public String savePost(@ModelAttribute Post post, Model model,
+                         @CookieValue("currentUser") String currentUser) {
+    User curUser = userService.findUserById(Long.parseLong(currentUser));
+    model.addAttribute("currentUser", currentUser);
+    post.setAuthor(curUser);
+    LocalDateTime now = LocalDateTime.now();
+    Timestamp timestamp = Timestamp.valueOf(now);
+    post.setCreatedDate(timestamp);
+    postService.savePost(post);
+    return "redirect:/posts";
   }
+
+  /******************** Delete Post ********************/
 
   @GetMapping("/delete-post/{id}")
   public String deletePost(@PathVariable long id) {

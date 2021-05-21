@@ -7,6 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Profile</title>
+
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
@@ -14,11 +16,15 @@
     integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous" defer>
     </script>
 
-  <script src="js/main.js" defer></script>
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" defer></script>
 
-  <link rel="stylesheet" href="css/style.css">
-  <!--  <link th:href="@{/static/css/style.css}" rel="stylesheet">-->
-  <title>Profile</title>
+  <!-- FA -->
+  <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"> -->
+
+  <!-- dev -->
+  <!--  <script src="/js/main.js" defer></script>-->
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
@@ -48,7 +54,7 @@
             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink">
               <li><a class="dropdown-item" th:href="@{'/profile/' + ${user.id}}">Profile</a></li>
               <li><a class="dropdown-item" th:href="@{'/edit/' + ${user.id}}">Edit Account</a></li>
-              <li><a class="dropdown-item" href="#">Sign Out</a></li>
+              <li><a class="dropdown-item" th:href="@{/signout}">Sign Out</a></li>
             </ul>
           </li>
         </ul>
@@ -58,20 +64,20 @@
 
   <div class="container">
 
-    <img th:src="@{${user.img}}" />
+    <img th:src="@{${user.img}}" alt="User Image">
     <h2 th:text="${user.username}"></h2>
 
-    <!--  <a th:href="@{'/posts/' + ${user.id}}">Posts</a>-->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#postModal">
+      Add Post
+    </button>
 
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#postModal" data-whatever="@post">Add
-      @post</button>
-
-    <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="postModalLabel"
       aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+            <h5 class="modal-title" id="exampleModalLabel">New <message></message>
+            </h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -79,7 +85,7 @@
           <div class="modal-body">
             <form>
               <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Recipient:</label>
+                <label for="recipient-name" class="col-form-label">Title:</label>
                 <input type="text" class="form-control" id="recipient-name">
               </div>
               <div class="form-group">
@@ -90,30 +96,22 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Send message</button>
+            <button type="button" class="btn btn-primary">Submit Post</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!--  <form th:action="@{/addpost}" th:object="${post}" method="POST">-->
-    <!--    <input type="hidden" th:field="*{id}">-->
-    <!--    <input type="text" placeholder="Title" autocomplete="off" th:field="*{title}">-->
-    <!--    &lt;!&ndash; <input type="text" placeholder="Message *" th:field="*{content}">&ndash;&gt;-->
-    <!--    <textarea cols="30" rows="10" placeholder="Message *" th:field="*{content}"></textarea>-->
-    <!--    <input type="submit" value="Submit Post">-->
-    <!--  </form>-->
+    <!-- <form th:action="@{/addpost}" th:object="${post}" method="POST">
+      <input type="hidden" th:field="*{id}">
+      <input type="text" placeholder="Title" autocomplete="off" th:field="*{title}">
+      <textarea cols="30" rows="10" placeholder="Message *" th:field="*{content}"></textarea>
+      <input type="submit" value="Submit Post">
+    </form>
 
-    <!--  <form th:action="@{'/addpost/' + ${user.id}}" th:object="${post}" method="POST">-->
-    <!--    <input type="hidden" th:field="*{id}">-->
-    <!--&lt;!&ndash;    <input type="text" placeholder="Title" autocomplete="off" th:field="*{title}">&ndash;&gt;-->
-    <!--    <input type="text" placeholder="Message *" th:field="*{content}">-->
-    <!--    <input type="submit" value="Submit Post">-->
-    <!--  </form>-->
-
-    <!--  <div th:each="post:${posts}">-->
-    <!--    <p th:text="${post.content}"></p>-->
-    <!--  </div>-->
+    <div th:each="post:${posts}">
+      <p th:text="${post.content}"></p>
+    </div> -->
 
   </div>
 
