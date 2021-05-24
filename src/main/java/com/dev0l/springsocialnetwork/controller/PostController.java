@@ -24,10 +24,14 @@ public class PostController {
 
   @GetMapping("/posts")
   public String allPosts(@ModelAttribute("post") Post post, Model model,
-                         @CookieValue("currentUser") String currentUser) {
-    model.addAttribute("posts", postService.getAllPosts());
-    model.addAttribute("user", userService.findUserById(Long.parseLong(currentUser)));
-    return "posts";
+                         @CookieValue(value = "currentUser", required = false) String currentUser) {
+    if (currentUser != null) {
+      model.addAttribute("posts", postService.getAllPosts());
+      model.addAttribute("user", userService.findUserById(Long.parseLong(currentUser)));
+      return "posts";
+    }
+    model.addAttribute("msg", "You must Sign In to view Posts");
+    return "signin";
   }
 
   /******************** Add Post ********************/

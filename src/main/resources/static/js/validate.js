@@ -9,7 +9,6 @@ $(function () {
       // of an input field. Validation rules are defined
       // on the right side
       username: "required",
-      // lastname: "required",
       email: {
         // required: true,
         // Specify that email should be validated
@@ -23,8 +22,8 @@ $(function () {
     },
     // Specify validation error messages
     messages: {
-      firstname: "Please enter your username",
-      // lastname: "Please enter your lastname",
+      firstname: "Please enter your First Name",
+      lastname: "Please enter your Last Name",
       password: {
         required: "Please provide a password",
         minlength: "Your password must be at least 5 characters long"

@@ -15,8 +15,8 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 //    User getTheUserWithName(@Param("name") String name);
 
 //  Post findByTitle(String title);
-//
+
 //  List<Post> findPostByUserOrderById(Optional<User> user);
-//
+
 //  List<Post> findAllByOrderByIdDesc();
 }

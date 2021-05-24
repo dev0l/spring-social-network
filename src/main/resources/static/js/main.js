@@ -1,3 +1,14 @@
+let delAccount = document.getElementById('delAccount')
+$(delAccount).click(() => {
+  if (confirm("Are you sure that you want to delete account?")) {
+    alert("Account deleted")
+    return true;
+  } else {
+    alert("Still here")
+    return false;
+  }
+})
+
 // var myModal = document.getElementById('exampleModal')
 // var myInput = document.getElementById('myInput')
 

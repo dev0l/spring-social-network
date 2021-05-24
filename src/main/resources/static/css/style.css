@@ -1,6 +1,7 @@
 body {
   /*box-sizing: content-box;*/
   box-sizing: border-box;
+  background-color: #6C757D;
   /* Hide scrollbar for IE and Edge */
   -ms-overflow-style: none;
 }

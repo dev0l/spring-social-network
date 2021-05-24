@@ -1,8 +1,6 @@
 package com.dev0l.springsocialnetwork.controller;
 
-import com.dev0l.springsocialnetwork.entity.Post;
 import com.dev0l.springsocialnetwork.entity.User;
-import com.dev0l.springsocialnetwork.service.PostService;
 import com.dev0l.springsocialnetwork.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,20 +10,31 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 @Controller
 public class UserController {
 
   @Autowired
   private UserService userService;
-  private PostService postService;
+
+//  private boolean signedIn = false;
+//  private String curUser;
 
   /******************** Start ********************/
 
+//  @GetMapping("/")
+//  public String welcome() {
+//    return "index";
+//  }
   @GetMapping("/")
-  public String welcome() {
+  public String welcome(@ModelAttribute("user") User user, Model model,
+                        @CookieValue(value = "currentUser", required = false) String currentUser) {
+    if (currentUser != null && currentUser != "") {
+      model.addAttribute("user", userService.findUserById(Long.parseLong(currentUser)));
+      return "index";
+    }
     return "index";
+
   }
 
   /******************** Sign In ********************/
@@ -45,6 +54,7 @@ public class UserController {
     if (user != null && userService.authUser(username, password)) {
       Long id = user.getId();
       Cookie cookie = new Cookie("currentUser", id.toString());
+      cookie.setMaxAge(5000);
       response.addCookie(cookie);
       return "redirect:/profile/" + id;
     }
@@ -92,25 +102,13 @@ public class UserController {
   /******************** Profile ********************/
 
   @GetMapping("/profile/{id}")
-  public ModelAndView showProfile(@ModelAttribute("post") Post post,
-                                  @PathVariable long id) {
+  public ModelAndView showProfile(@PathVariable long id) {
     ModelAndView mv = new ModelAndView();
     mv.setViewName("profile");
     User userToShow = userService.findUserById(id);
     mv.addObject(userToShow);
     return mv;
   }
-
-//  @GetMapping("/profile/{id}")
-//  public ModelAndView showProfile(@ModelAttribute("post") Post post, Model model,
-//                                  @PathVariable long id) {
-//    ModelAndView mv = new ModelAndView();
-//    mv.setViewName("profile");
-//    User userToShow = userService.findUserById(id);
-//    model.addAttribute("posts", postService.getAllPosts());
-//    mv.addObject(userToShow);
-//    return mv;
-//  }
 
 //  @GetMapping("/profile/{id}")
 //  public String showProfile(@ModelAttribute("post") Post post, Model model,
@@ -125,12 +123,13 @@ public class UserController {
   /******************** Sign Out ********************/
 
   @GetMapping("/signout")
-  public String logout(HttpServletResponse response){
-    Cookie cookie = new Cookie("currentUserId", null);
+  public String logout(HttpServletResponse response) {
+//    Cookie cookie = new Cookie("currentUser", null);
+    Cookie cookie = new Cookie("currentUser", "");
     cookie.setMaxAge(0);
     response.addCookie(cookie);
-//    System.out.println(cookie.getValue());
-    return "index";
+//    System.out.println("value of cookie is " + cookie.getValue());
+    return "redirect:/";
   }
 
   /******************** Admin/Edit ********************/
@@ -143,26 +142,42 @@ public class UserController {
     mv.addObject("users", users);
     return mv;
   }*/
-
   @GetMapping("/edit/{id}")
-  public ModelAndView updateUser(@PathVariable long id) {
-    ModelAndView mv = new ModelAndView();
-    mv.setViewName("edit");
-    User userToUpdate = userService.findUserById(id);
-    mv.addObject(userToUpdate);
-    return mv;
+  public String updateUser(Model model,
+                           @PathVariable long id,
+                           @CookieValue("currentUser") String currentUser) {
+    userService.findUserById(id);
+    User curUser = userService.findUserById(Long.parseLong(currentUser));
+    model.addAttribute("currentUser", currentUser);
+//    User userToUpdate = userService.findUserById(id);
+//    userToUpdate = curUser;
+//    model.addAttribute(userToUpdate);
+    model.addAttribute(curUser);
+    return "edit";
   }
 
   @PostMapping("/update-user")
   public String updateUser(@ModelAttribute User user) {
     userService.updateUser(user);
-    return "redirect:/profile";
+    Long id = user.getId();
+    return "redirect:/profile/" + id;
   }
 
   @GetMapping("/delete/{id}")
   public String deleteUser(@PathVariable long id) {
     userService.deleteUser(id);
-    return "redirect:/";
+    return "redirect:/signout";
   }
+
+//  @GetMapping("/delete/{id}")
+//  public String deleteUser(@PathVariable long id,
+//                           HttpServletResponse response) {
+////    Cookie cookie = new Cookie("currentUser", null);
+//    Cookie cookie = new Cookie("currentUser", "");
+//    cookie.setMaxAge(0);
+//    response.addCookie(cookie);
+//    userService.deleteUser(id);
+//    return "redirect:/signout";
+//  }
 
 }
