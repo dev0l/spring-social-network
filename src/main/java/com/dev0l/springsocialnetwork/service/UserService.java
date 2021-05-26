@@ -17,25 +17,6 @@ public class UserService {
   @Autowired
   private UserRepository userRepository;
 
-  public List<User> getAllUsers() {
-    return userRepository.findAll();
-  }
-
-  public User findUserById(long id) {
-    return userRepository.findById(id).orElseThrow();
-  }
-
-  public User findUserByUsername(String username) {
-    return userRepository.findByUsername(username);
-  }
-
-  public void updateUser(User user) {
-    User userDB = userRepository.findById(user.getId()).orElseThrow();
-    userDB.setUsername(user.getUsername());
-    userDB.setAddress(user.getAddress());
-    userRepository.save(userDB);
-  }
-
   public void saveUser(User user) {
     byte[] salt = generateSalt();
     String saltString = convertByteToStringForDB(salt);
@@ -85,7 +66,27 @@ public class UserService {
     return dbUser.getPassword().equals(passwordToCompare);
   }
 
+  public List<User> getAllUsers() {
+    return userRepository.findAll();
+  }
+
+  public User findUserById(long id) {
+    return userRepository.findById(id).orElseThrow();
+  }
+
+  public User findUserByUsername(String username) {
+    return userRepository.findByUsername(username);
+  }
+
+  public void updateUser(User user) {
+    User userDB = userRepository.findById(user.getId()).orElseThrow();
+    userDB.setUsername(user.getUsername());
+    userDB.setAddress(user.getAddress());
+    userRepository.save(userDB);
+  }
+
   public void deleteUser(long id) {
     userRepository.deleteById(id);
   }
+
 }

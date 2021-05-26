@@ -28,7 +28,7 @@
   <!--  <link href="blog.css" rel="stylesheet">-->
 
   <!-- dev -->
-  <!-- <script src="/js/main.js" defer></script> -->
+  <script src="/js/main.js" defer></script>
   <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -58,7 +58,6 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink">
               <li><a class="dropdown-item" th:href="@{'/profile/' + ${user.id}}">Profile</a></li>
-              <!-- <li><a class="dropdown-item" href="/signup">Sign Up</a></li> -->
               <li><a class="dropdown-item" th:href="@{/signout}">Sign Out</a></li>
             </ul>
           </li>
@@ -72,7 +71,6 @@
     <h1>Posts</h1>
 
     <form th:action="@{/addpost}" th:object="${post}" method="POST">
-      <!-- <input type="hidden" th:field="*{id}"> -->
       <div class="form-group">
         <label for="title" class="col-form-label">Title</label>
         <input type="text" class="form-control" id="title" placeholder="Title" autocomplete="off" th:field="*{title}">
@@ -97,12 +95,10 @@
             </h3>
             <div class="mb-1 text-muted" th:text="${post.createdDate}"></div>
             <p class="card-text mb-auto" th:text="${post.content}"></p>
-            <!-- <a href="#">Continue reading</a> -->
             <a th:if="${post.author.id == user.id}" th:href="@{'/delete-post/' + ${post.id}}">Delete Post</a>
-            <a th:if="${post.author.id == user.id}" th:href="@{'/delete-by-author/' + ${post.author.id}}">Delete All Of My Posts</a>
+            <a id="delPosts" th:if="${post.author.id == user.id}"
+              th:href="@{'/delete-by-author/' + ${post.author.id}}">Delete All My Posts</a>
           </div>
-          <!-- <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb"
-          alt="Card Image"> -->
           <img src="https://via.placeholder.com/150" class="card-img-right flex-auto d-none d-md-block"
             alt="Card Image">
         </div>

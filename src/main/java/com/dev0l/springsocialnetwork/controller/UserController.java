@@ -1,5 +1,6 @@
 package com.dev0l.springsocialnetwork.controller;
 
+import com.dev0l.springsocialnetwork.entity.Post;
 import com.dev0l.springsocialnetwork.entity.User;
 import com.dev0l.springsocialnetwork.service.PostService;
 import com.dev0l.springsocialnetwork.service.UserService;
@@ -7,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -21,15 +21,8 @@ public class UserController {
   @Autowired
   private PostService postService;
 
-//  private boolean signedIn = false;
-//  private String curUser;
-
   /******************** Start ********************/
 
-//  @GetMapping("/")
-//  public String welcome() {
-//    return "index";
-//  }
   @GetMapping("/")
   public String welcome(@ModelAttribute("user") User user, Model model,
                         @CookieValue(value = "currentUser", required = false) String currentUser) {
@@ -38,7 +31,6 @@ public class UserController {
       return "index";
     }
     return "index";
-
   }
 
   /******************** Sign In ********************/
@@ -60,7 +52,7 @@ public class UserController {
       Cookie cookie = new Cookie("currentUser", id.toString());
       cookie.setMaxAge(5000);
       response.addCookie(cookie);
-      System.out.println("value of cookie is " + cookie.getValue());
+      //System.out.println("value of cookie is " + cookie.getValue());
       return "redirect:/profile/" + id;
     }
     return "redirect:/authError";
@@ -107,33 +99,22 @@ public class UserController {
   /******************** Profile ********************/
 
   @GetMapping("/profile/{id}")
-  public ModelAndView showProfile(@PathVariable long id) {
-    ModelAndView mv = new ModelAndView();
-    mv.setViewName("profile");
-    User userToShow = userService.findUserById(id);
-    mv.addObject(userToShow);
-    return mv;
+  public String showProfile(@ModelAttribute("post") Post post, Model model,
+                            @CookieValue("currentUser") String currentUser,
+                            @PathVariable long id) {
+    model.addAttribute("posts", postService.getPostByAuthorIdCreatedDate(id));
+    model.addAttribute("user", userService.findUserById(Long.parseLong(currentUser)));
+    return "profile";
   }
-
-//  @GetMapping("/profile/{id}")
-//  public String showProfile(@ModelAttribute("post") Post post, Model model,
-//                            @CookieValue("currentUser") String currentUser,
-//                            @PathVariable long id) {
-//    User user = userService.findUserById(id);
-//    model.addAttribute("posts", postService.getAllPosts());
-//    model.addAttribute("user", userService.findUserById(Long.parseLong(currentUser)));
-//    return "profile";
-//  }
 
   /******************** Sign Out ********************/
 
   @GetMapping("/signout")
   public String logout(HttpServletResponse response) {
-//    Cookie cookie = new Cookie("currentUser", null);
     Cookie cookie = new Cookie("currentUser", "");
     cookie.setMaxAge(0);
     response.addCookie(cookie);
-//    System.out.println("value of cookie is " + cookie.getValue());
+    //System.out.println("value of cookie is " + cookie.getValue());
     return "redirect:/";
   }
 
@@ -147,6 +128,7 @@ public class UserController {
     mv.addObject("users", users);
     return mv;
   }*/
+
   @GetMapping("/edit/{id}")
   public String updateUser(Model model,
                            @PathVariable long id,
@@ -154,9 +136,6 @@ public class UserController {
     userService.findUserById(id);
     User curUser = userService.findUserById(Long.parseLong(currentUser));
     model.addAttribute("currentUser", currentUser);
-//    User userToUpdate = userService.findUserById(id);
-//    userToUpdate = curUser;
-//    model.addAttribute(userToUpdate);
     model.addAttribute(curUser);
     return "edit";
   }
@@ -174,16 +153,5 @@ public class UserController {
     userService.deleteUser(id);
     return "redirect:/signout";
   }
-
-//  @GetMapping("/delete/{id}")
-//  public String deleteUser(@PathVariable long id,
-//                           HttpServletResponse response) {
-////    Cookie cookie = new Cookie("currentUser", null);
-//    Cookie cookie = new Cookie("currentUser", "");
-//    cookie.setMaxAge(0);
-//    response.addCookie(cookie);
-//    userService.deleteUser(id);
-//    return "redirect:/signout";
-//  }
 
 }

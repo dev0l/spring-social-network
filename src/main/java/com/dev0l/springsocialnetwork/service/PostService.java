@@ -13,7 +13,25 @@ public class PostService {
   @Autowired
   private PostRepository postRepository;
 
-  public void savePost(Post post) { postRepository.save(post); }
+  public void savePost(Post post) {
+    postRepository.save(post);
+  }
+
+  public List<Post> getAllPosts() {
+    return postRepository.findAll();
+  }
+
+  public List<Post> getPostsByCreatedDate() {
+    return postRepository.findAllByOrderByCreatedDateDesc();
+  }
+
+  public List<Post> getPostByAuthorId(long id) {
+    return postRepository.findByAuthorId(id);
+  }
+
+  public List<Post> getPostByAuthorIdCreatedDate(long id) {
+    return postRepository.findAllByAuthorIdOrderByCreatedDateDesc(id);
+  }
 
   public void deletePost(long id) {
     postRepository.deleteById(id);
@@ -21,18 +39,6 @@ public class PostService {
 
   public void deletePostsByAuthorId(long id) {
     postRepository.deleteAllByAuthorId(id);
-  }
-
-  public List<Post> getAllPosts(){
-    return postRepository.findAll();
-  }
-
-  public List<Post> getPostByAuthorId(long id) {
-    return postRepository.findByAuthorId(id);
-  }
-
-  public List<Post> getPostsByCreatedDate() {
-    return postRepository.findAllByOrderByCreatedDateDesc();
   }
 
 }

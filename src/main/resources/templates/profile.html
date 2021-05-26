@@ -23,7 +23,7 @@
   <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"> -->
 
   <!-- dev -->
-  <!--  <script src="/js/main.js" defer></script>-->
+  <script src="/js/main.js" defer></script>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
@@ -62,13 +62,18 @@
     </div>
   </nav>
 
-<!--  <div class="container" th:if="${user.id == id}">-->
   <div class="container">
 
     <img th:src="@{${user.img}}" alt="User Image">
     <h2 th:text="${user.username}"></h2>
 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#postModal">
+  </div>
+
+  <div class="container">
+
+    <h4>Posts</h4>
+
+    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#postModal">
       Add Post
     </button>
 
@@ -101,18 +106,42 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <!-- <form th:action="@{/addpost}" th:object="${post}" method="POST">
-      <input type="hidden" th:field="*{id}">
-      <input type="text" placeholder="Title" autocomplete="off" th:field="*{title}">
-      <textarea cols="30" rows="10" placeholder="Message *" th:field="*{content}"></textarea>
-      <input type="submit" value="Submit Post">
+    <form th:action="@{/addpost}" th:object="${post}" method="POST">
+      <div class="form-group">
+        <label for="title" class="col-form-label">Title</label>
+        <input type="text" class="form-control" id="title" placeholder="Title" autocomplete="off" th:field="*{title}">
+      </div>
+      <div class="form-group">
+        <label for="message" class="col-form-label">Message</label>
+        <textarea type="text" class="form-control" id="message" placeholder="Message *" autocomplete="off"
+          th:field="*{content}"></textarea>
+      </div>
+      <input class="btn btn-primary btn-block" type="submit" value="Submit Post">
     </form>
 
-    <div th:each="post:${posts}">
-      <p th:text="${post.content}"></p>
-    </div> -->
+    <div class="row mb-2">
+      <div class="col-md-6" th:each="post:${posts}">
+        <div class="card flex-md-row mb-4 box-shadow h-md-250">
+          <div class="card-body d-flex flex-column align-items-start">
+            <strong class="d-inline-block mb-2 text-primary" th:text="${post.author.username}"></strong>
+            <h3 class="mb-0">
+              <a class="text-dark" href="#">
+                <p th:text="${post.title}"></p>
+              </a>
+            </h3>
+            <div class="mb-1 text-muted" th:text="${post.createdDate}"></div>
+            <p class="card-text mb-auto" th:text="${post.content}"></p>
+            <a th:if="${post.author.id == user.id}" th:href="@{'/delete-post/' + ${post.id}}">Delete Post</a>
+            <a id="delPosts" th:if="${post.author.id == user.id}"
+              th:href="@{'/delete-by-author/' + ${post.author.id}}">Delete All My Posts</a>
+          </div>
+          <img src="https://via.placeholder.com/150" class="card-img-right flex-auto d-none d-md-block"
+            alt="Card Image">
+        </div>
+      </div>
+    </div>
 
   </div>
 
