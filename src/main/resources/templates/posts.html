@@ -99,6 +99,7 @@
             <p class="card-text mb-auto" th:text="${post.content}"></p>
             <!-- <a href="#">Continue reading</a> -->
             <a th:if="${post.author.id == user.id}" th:href="@{'/delete-post/' + ${post.id}}">Delete Post</a>
+            <a th:if="${post.author.id == user.id}" th:href="@{'/delete-by-author/' + ${post.author.id}}">Delete All Of My Posts</a>
           </div>
           <!-- <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb"
           alt="Card Image"> -->

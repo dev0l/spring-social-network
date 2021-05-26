@@ -26,7 +26,9 @@ public class PostController {
   public String allPosts(@ModelAttribute("post") Post post, Model model,
                          @CookieValue(value = "currentUser", required = false) String currentUser) {
     if (currentUser != null) {
-      model.addAttribute("posts", postService.getAllPosts());
+//      model.addAttribute("posts", postService.getAllPosts());
+      model.addAttribute("posts", postService.getPostsByCreatedDate());
+//      model.addAttribute("posts", postService.getPostByAuthorId(Long.parseLong(currentUser)));
       model.addAttribute("user", userService.findUserById(Long.parseLong(currentUser)));
       return "posts";
     }
@@ -54,6 +56,12 @@ public class PostController {
   @GetMapping("/delete-post/{id}")
   public String deletePost(@PathVariable long id) {
     postService.deletePost(id);
+    return "redirect:/posts";
+  }
+
+  @GetMapping("/delete-by-author/{id}")
+  public String deleteByAuthor(@PathVariable long id) {
+    postService.deletePostsByAuthorId(id);
     return "redirect:/posts";
   }
 

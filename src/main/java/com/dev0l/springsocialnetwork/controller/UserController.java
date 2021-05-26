@@ -1,6 +1,7 @@
 package com.dev0l.springsocialnetwork.controller;
 
 import com.dev0l.springsocialnetwork.entity.User;
+import com.dev0l.springsocialnetwork.service.PostService;
 import com.dev0l.springsocialnetwork.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,9 @@ public class UserController {
 
   @Autowired
   private UserService userService;
+
+  @Autowired
+  private PostService postService;
 
 //  private boolean signedIn = false;
 //  private String curUser;
@@ -56,6 +60,7 @@ public class UserController {
       Cookie cookie = new Cookie("currentUser", id.toString());
       cookie.setMaxAge(5000);
       response.addCookie(cookie);
+      System.out.println("value of cookie is " + cookie.getValue());
       return "redirect:/profile/" + id;
     }
     return "redirect:/authError";
@@ -165,6 +170,7 @@ public class UserController {
 
   @GetMapping("/delete/{id}")
   public String deleteUser(@PathVariable long id) {
+    postService.deletePostsByAuthorId(id);
     userService.deleteUser(id);
     return "redirect:/signout";
   }

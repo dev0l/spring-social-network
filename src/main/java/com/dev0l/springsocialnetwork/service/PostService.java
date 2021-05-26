@@ -19,8 +19,20 @@ public class PostService {
     postRepository.deleteById(id);
   }
 
+  public void deletePostsByAuthorId(long id) {
+    postRepository.deleteAllByAuthorId(id);
+  }
+
   public List<Post> getAllPosts(){
     return postRepository.findAll();
+  }
+
+  public List<Post> getPostByAuthorId(long id) {
+    return postRepository.findByAuthorId(id);
+  }
+
+  public List<Post> getPostsByCreatedDate() {
+    return postRepository.findAllByOrderByCreatedDateDesc();
   }
 
 }
