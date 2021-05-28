@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "posts")
-public class Post {
+public class Post extends Message {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -13,8 +13,6 @@ public class Post {
 
   @ManyToOne(fetch = FetchType.EAGER)
   private User author;
-  private String title;
-  private String content;
   private Date createdDate;
 
   public Post() {
@@ -34,22 +32,6 @@ public class Post {
 
   public void setAuthor(User author) {
     this.author = author;
-  }
-
-  public String getTitle() {
-    return title;
-  }
-
-  public void setTitle(String title) {
-    this.title = title;
-  }
-
-  public String getContent() {
-    return content;
-  }
-
-  public void setContent(String content) {
-    this.content = content;
   }
 
   public Date getCreatedDate() {

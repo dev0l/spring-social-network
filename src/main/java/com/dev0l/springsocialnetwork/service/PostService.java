@@ -17,19 +17,19 @@ public class PostService {
     postRepository.save(post);
   }
 
-  public List<Post> getAllPosts() {
+  public List<Post> findAllPosts() {
     return postRepository.findAll();
   }
 
-  public List<Post> getPostsByCreatedDate() {
+  public List<Post> findPostsByCreatedDate() {
     return postRepository.findAllByOrderByCreatedDateDesc();
   }
 
-  public List<Post> getPostByAuthorId(long id) {
+  public List<Post> findPostByAuthorId(long id) {
     return postRepository.findByAuthorId(id);
   }
 
-  public List<Post> getPostByAuthorIdCreatedDate(long id) {
+  public List<Post> findPostByAuthorIdCreatedDate(long id) {
     return postRepository.findAllByAuthorIdOrderByCreatedDateDesc(id);
   }
 

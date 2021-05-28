@@ -17,6 +17,7 @@ public class PostController {
 
   @Autowired
   private PostService postService;
+
   @Autowired
   private UserService userService;
 
@@ -26,7 +27,7 @@ public class PostController {
   public String allPosts(@ModelAttribute("post") Post post, Model model,
                          @CookieValue(value = "currentUser", required = false) String currentUser) {
     if (currentUser != null) {
-      model.addAttribute("posts", postService.getPostsByCreatedDate());
+      model.addAttribute("posts", postService.findPostsByCreatedDate());
       model.addAttribute("user", userService.findUserById(Long.parseLong(currentUser)));
       return "posts";
     }

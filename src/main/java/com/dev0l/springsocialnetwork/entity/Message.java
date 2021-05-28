@@ -6,7 +6,7 @@ import javax.persistence.MappedSuperclass;
 public class Message {
 
   private String title;
-  private String message;
+  private String content;
 
   public Message() {
   }
@@ -20,10 +20,10 @@ public class Message {
   }
 
   public String getMessage() {
-    return message;
+    return content;
   }
 
   public void setMessage(String message) {
-    this.message = message;
+    this.content = message;
   }
 }

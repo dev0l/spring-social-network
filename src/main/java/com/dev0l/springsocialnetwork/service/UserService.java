@@ -66,7 +66,7 @@ public class UserService {
     return dbUser.getPassword().equals(passwordToCompare);
   }
 
-  public List<User> getAllUsers() {
+  public List<User> findAllUsers() {
     return userRepository.findAll();
   }
 

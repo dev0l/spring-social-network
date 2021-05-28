@@ -102,7 +102,8 @@ public class UserController {
   public String showProfile(@ModelAttribute("post") Post post, Model model,
                             @CookieValue("currentUser") String currentUser,
                             @PathVariable long id) {
-    model.addAttribute("posts", postService.getPostByAuthorIdCreatedDate(id));
+    userService.findUserById(id);
+    model.addAttribute("posts", postService.findPostByAuthorIdCreatedDate(id));
     model.addAttribute("user", userService.findUserById(Long.parseLong(currentUser)));
     return "profile";
   }
@@ -110,7 +111,7 @@ public class UserController {
   /******************** Sign Out ********************/
 
   @GetMapping("/signout")
-  public String logout(HttpServletResponse response) {
+  public String signOut(HttpServletResponse response) {
     Cookie cookie = new Cookie("currentUser", "");
     cookie.setMaxAge(0);
     response.addCookie(cookie);
@@ -130,7 +131,7 @@ public class UserController {
   }*/
 
   @GetMapping("/edit/{id}")
-  public String updateUser(Model model,
+  public String editUser(Model model,
                            @PathVariable long id,
                            @CookieValue("currentUser") String currentUser) {
     userService.findUserById(id);
