@@ -19,11 +19,11 @@ public class Message {
     this.title = title;
   }
 
-  public String getMessage() {
+  public String getContent() {
     return content;
   }
 
-  public void setMessage(String message) {
-    this.content = message;
+  public void setContent(String content) {
+    this.content = content;
   }
 }

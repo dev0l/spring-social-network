@@ -89,15 +89,15 @@
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
             </div>
-            <input class="form-control" type="password" placeholder="Password *" required aria-required="true"
-              th:field="*{password}">
+            <input id="password" class="form-control" type="password" placeholder="Password *" required
+              aria-required="true" th:field="*{password}">
           </div>
           <div class="form-group input-group">
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
             </div>
-            <input class="form-control" type="password" placeholder="Confirm Password *" required aria-required="true"
-              th:name="passwordConfirm">
+            <input id="confirm_password" name="confirm_password" class="form-control" type="password"
+              placeholder="Confirm Password *" required aria-required="true" th:name="passwordConfirm">
           </div>
           <div class="form-group input-group">
             <div class="input-group-prepend">
@@ -115,7 +115,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
             </div>
-            <input class="form-control" type="text" placeholder="Email" aria-describedby="emailHelp" autocomplete="off"
+            <input class="form-control" type="email" placeholder="Email" aria-describedby="emailHelp" autocomplete="off"
               th:field="*{email}">
           </div>
           <div class="form-group input-group">
