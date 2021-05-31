@@ -15,7 +15,7 @@ spring.datasource.url=jdbc:mysql://localhost:3306/DATABASE NAME?useSSL=false&ser
 spring.datasource.username=USERNAME FOR DATABASE
 spring.datasource.password=PASSWORD FOR DATABASE
 ```
-* Run the project using IntelliJ IDE
+* Run the project using IntelliJ (IDE)
 
 ## Technology Stack
 * MySQL - Database used
