@@ -42,4 +42,4 @@ IntelliJ - IDE used
   * GitKraken - Git GUI
 
 ## Author
-Marcus Mobark (dev0l) - [GitHub](https://www.github.com/dev0l) & [LinkedIn](https://se.linkedin.com/in/marcus-mobark-43358386)
+Marcus Mobark (dev0l) - [GitHub](https://www.github.com/dev0l) , [LinkedIn](https://se.linkedin.com/in/marcus-mobark-43358386)
