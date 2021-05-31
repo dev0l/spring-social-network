@@ -41,5 +41,5 @@ IntelliJ - IDE used
   * Git Bash - Git CLI
   * GitKraken - Git GUI
 
-## Authors
-Marcus Mobark (dev0l) - [GitHub](https://www.github.com/dev0l) [LinkedIn](https://se.linkedin.com/in/marcus-mobark-43358386)
+## Author
+Marcus Mobark (dev0l) - [GitHub](https://www.github.com/dev0l) & [LinkedIn](https://se.linkedin.com/in/marcus-mobark-43358386)
