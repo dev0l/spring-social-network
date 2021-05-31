@@ -37,7 +37,7 @@ jQuery - JavaScript Library
 IntelliJ - IDE used
 
 ## Versioning
-* Git for versioning.
+* Git for versioning
   * Git Bash - Git CLI
   * GitKraken - Git GUI
 
