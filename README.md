@@ -37,9 +37,9 @@ jQuery - JavaScript Library
 IntelliJ - IDE used
 
 ## Versioning
-Git for versioning.
-Git Bash - Git CLI
-GitKraken - Git GUI
+* Git for versioning.
+  * Git Bash - Git CLI
+  * GitKraken - Git GUI
 
 ## Authors
-Marcus Mobark (dev0l) - GitHub LinkedIn
+Marcus Mobark (dev0l) - [GitHub](https://www.github.com/dev0l) [LinkedIn](https://se.linkedin.com/in/marcus-mobark-43358386)
