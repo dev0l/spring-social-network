@@ -25,7 +25,6 @@ spring.datasource.password=PASSWORD FOR DATABASE
 * Maven - Dependency Management
 
 * Spring Boot - Back-End Framework used with the following dependencies:
-
 ..* Spring Boot Starter Data JPA
 ..* Spring Boot Starter Thymeleaf
 ..* Spring Boot Starter Web (uses Spring MVC)
