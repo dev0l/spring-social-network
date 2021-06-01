@@ -8,12 +8,12 @@ The App was created according to the MVC (Model-View-Controller) paradigm. Basis
 Deploy the App locally:
 
 * Clone Repository to desired local destination directory
-* Create a Database with MySQL (DATABASE NAME, USERNAME FOR DATABASE and PASSWORD FOR DATABASE)
-* In application.properties enter following:
+* Create a Database with MySQL (DATABASE, USERNAME and PASSWORD)
+* In application.properties enter the DATABASE, USERNAME and PASSWORD:
 ```Java
-spring.datasource.url=jdbc:mysql://localhost:3306/DATABASE NAME?useSSL=false&serverTimezone=UTC
-spring.datasource.username=USERNAME FOR DATABASE
-spring.datasource.password=PASSWORD FOR DATABASE
+spring.datasource.url=jdbc:mysql://localhost:3306/DATABASE?useSSL=false&serverTimezone=UTC
+spring.datasource.username=USERNAME
+spring.datasource.password=PASSWORD
 ```
 * Run the project using IntelliJ (IDE)
 
