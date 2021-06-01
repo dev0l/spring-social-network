@@ -15,7 +15,7 @@ spring.datasource.url=jdbc:mysql://localhost:3306/DATABASE?useSSL=false&serverTi
 spring.datasource.username=USERNAME
 spring.datasource.password=PASSWORD
 ```
-* Run the project using IntelliJ (IDE) and navigate to URL: localhost:8080
+* Run the project using IntelliJ (IDE) and, in your browser, navigate to URL: localhost:8080
 
 ## Technology Stack
 * MySQL - Database used
