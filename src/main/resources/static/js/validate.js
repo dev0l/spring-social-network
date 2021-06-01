@@ -2,7 +2,9 @@
 $(function () {
   // Initialize form validation on the registration form.
   // It has the name attribute "registration"
-  $("form[name='signup'], form[name='signin'], form[name='edit']").validate({
+  // $("form[name='signup'], form[name='signin'], form[name='edit']").validate({
+  $("form").validate({
+    // errorElement: "span",
     // Specify validation rules
     rules: {
       // The key name on the left side is the name attribute
@@ -19,9 +21,9 @@ $(function () {
         required: true,
         minlength: 5
       },
-      confirm_password: {
-        required: true,
-        minlength: 5,
+      password_confirm: {
+        // required: true,
+        // minlength: 5,
         equalTo: "#password"
       }
     },
@@ -33,9 +35,9 @@ $(function () {
         required: "Please provide a password",
         minlength: "Your password must be at least 5 characters long"
       },
-      confirm_password: {
-        required: "Please provide a password",
-        minlength: "Your password must be at least 5 characters long",
+      password_confirm: {
+        // required: "Please provide a password",
+        // minlength: "Your password must be at least 5 characters long",
         equalTo: "Please enter the same password as above"
       },
       email: "Please enter a valid email address"

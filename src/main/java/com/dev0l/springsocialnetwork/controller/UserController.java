@@ -60,7 +60,7 @@ public class UserController {
 
   @GetMapping("/authError")
   public String authError(Model model) {
-    model.addAttribute("msg", "Sign In Failed");
+    model.addAttribute("msg", "The username and password you entered is incorrect. No Account? Sign Up using the link below.");
     return "signin";
   }
 
@@ -74,9 +74,9 @@ public class UserController {
   @PostMapping("/save-user")
   public String saveUser(User user,
                          @RequestParam("password") String password,
-                         @RequestParam("passwordConfirm") String passwordConfirm) {
+                         @RequestParam("password_confirm") String password_confirm) {
 
-    if (password.equals(passwordConfirm)) {
+    if (password.equals(password_confirm)) {
       user.setImg("https://via.placeholder.com/150");
       userService.saveUser(user);
       return "redirect:/success";
@@ -92,7 +92,7 @@ public class UserController {
   @GetMapping("/failed")
   public String failed(@ModelAttribute("user") User user,
                        Model model) {
-    model.addAttribute("msg", "Oops something went wrong!");
+    model.addAttribute("msg", "Sign up failed. Please try again and make sure that the passwords match.");
     return "signup";
   }
 
@@ -129,11 +129,10 @@ public class UserController {
     mv.addObject("users", users);
     return mv;
   }*/
-
   @GetMapping("/edit/{id}")
   public String editUser(Model model,
-                           @PathVariable long id,
-                           @CookieValue("currentUser") String currentUser) {
+                         @PathVariable long id,
+                         @CookieValue("currentUser") String currentUser) {
     userService.findUserById(id);
     User curUser = userService.findUserById(Long.parseLong(currentUser));
     model.addAttribute("currentUser", currentUser);
